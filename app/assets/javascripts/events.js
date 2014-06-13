@@ -68,6 +68,8 @@ EventCollection.prototype.sortByDate = function() {
 
 
 
+
+
 function EventView(eventModel) {
   this.model = eventModel;
   this.el = undefined;
@@ -96,7 +98,20 @@ function clickedEvent(id) {
   $.each(eventCollection.models, function(index, event){
     if (event.eventID == id) {
       //window.alert(event.eventID);
-      console.log(event);
+      //console.log(event);
+      event.create();
+    }
+  });
+}
+
+EventModel.prototype.create = function() {
+  $.ajax({
+    url: '/events',
+    method: 'post',
+    dataType: 'json',
+    data: {event: {name: this.eventName}},
+    success: function(data) {
+      console.log(data);
     }
   });
 }
