@@ -74,12 +74,36 @@ function EventView(eventModel) {
 }
 
 EventView.prototype.render = function() {
-  var $eventLi = $('<li>').text('Start:'+this.model.startDate + '  End:' + this.model.endDate + '  Recur:' + this.model.recurString);
+  //var $eventLi = $('<li>').text('Start:'+this.model.startDate + '  End:' + this.model.endDate + '  Recur:' + this.model.recurString);
+  var $eventLi =$('<li>');
+  var $link = $('<a>', {
+    text: 'Start:'+this.model.startDate + '  End:' + this.model.endDate + '  Recur:' + this.model.recurString,
+    href: '',
+    id: this.model.eventID,
+    click: function(){
+      clickedEvent(this.id);
+      return false;
+    }
+  });
+  $eventLi.append($link);
+
   this.el = $eventLi;
   return this;
 }
 
+
+function clickedEvent(id) {
+  $.each(eventCollection.models, function(index, event){
+    if (event.eventID == id) {
+      //window.alert(event.eventID);
+      console.log(event);
+    }
+  });
+}
+
+var eventCollection = new EventCollection();
+
 $(function() {
-  eventCollection = new EventCollection();
+  //eventCollection = new EventCollection();
   eventCollection.fetch();
 });
