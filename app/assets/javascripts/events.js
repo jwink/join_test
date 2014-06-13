@@ -34,6 +34,7 @@ function EventModel(data) {
   this.recurringStartDate = data.recurring_start_date;
   this.recurringEndDate = data.recurring_end_date;
   this.recurDays = data.recur_days;
+  this.category = data.category
   this.cleanUpDates();
   //console.log(data.event_date_list.join());
 }
@@ -80,7 +81,7 @@ EventView.prototype.render = function() {
   var $eventLi =$('<li>');
   var $link = $('<a>', {
     //text: 'Start:'+this.model.startDate + '  End:' + this.model.endDate + '  Recur:' + this.model.recurString,
-    text: this.model.eventName,
+    text: this.model.category + ':  ' + this.model.eventName,
     href: '',
     id: this.model.eventID,
     click: function(){
