@@ -79,13 +79,18 @@ EventView.prototype.render = function() {
   //var $eventLi = $('<li>').text('Start:'+this.model.startDate + '  End:' + this.model.endDate + '  Recur:' + this.model.recurString);
   var $eventLi =$('<li>');
   var $link = $('<a>', {
-    text: 'Start:'+this.model.startDate + '  End:' + this.model.endDate + '  Recur:' + this.model.recurString,
+    //text: 'Start:'+this.model.startDate + '  End:' + this.model.endDate + '  Recur:' + this.model.recurString,
+    text: this.model.eventName,
     href: '',
     id: this.model.eventID,
     click: function(){
       clickedEvent(this.id);
       return false;
     }
+  });
+  var that = this;
+  $link.hover(function() {
+    console.log(that.model.eventID);
   });
   $eventLi.append($link);
 
